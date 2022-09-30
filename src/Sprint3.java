@@ -5,9 +5,9 @@ public class Sprint3 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 
-		int qtdEquipe, qtdCombate;
+		int qtdEquipe, qtdCombate, init=11;
 		String resultadoCombate;
-		int auxP, auxN, auxE, auxT;
+		int auxP, auxN, auxE;
 
 		System.out.print("Informe a quantidade de equipes: ");
 		qtdEquipe = teclado.nextInt();
@@ -18,14 +18,12 @@ public class Sprint3 {
 		int[] pontuacaoTotal =new int[qtdEquipe];
 
 		for (int i = 0; i < qtdEquipe; i++) {
+			
 			System.out.println(" ");
-			System.out.print("Qual o número da equipe " + (i + 1) + ": ");
-			numEquipe[i] = teclado.nextInt();
+			System.out.println("Equipe: " + (init));
+			numEquipe[i]=init;
 
-			System.out.print("\nEquipe #" + (numEquipe[i]));
-			System.out.println();
-
-			System.out.print("Qual foi a nota do design do robô da equipe " + (i + 1) + "? ");
+			System.out.print("Qual foi a nota do design do robô da equipe " + (init) + "? ");
 			notaDesign[i] = teclado.nextInt();
 
 			System.out.println(" ");
@@ -34,12 +32,10 @@ public class Sprint3 {
 			System.out.println(" ");
 
 			for (int combate = 1; combate <= qtdCombate; combate++) {
-				System.out.print("Combate " + combate
-						+ " obteve: (digite APENAS V para vitória ou D para derrota ou E para empate) ");
+				System.out.print("Combate " + combate + " obteve: (digite APENAS V para vitória ou D para derrota ou E para empate) ");
 				resultadoCombate = teclado.next();
 				System.out.println(" ");
 
-				// notaDesign=0;
 
 				if (resultadoCombate.equalsIgnoreCase("V")) {
 					pontosCombate[i] += 5;
@@ -53,6 +49,7 @@ public class Sprint3 {
 
 			}
 			pontuacaoTotal[i] = pontosCombate[i]+notaDesign[i];
+			init++;
 		// ordenação do ranking
 		}
 		System.out.println(" ");
@@ -69,22 +66,14 @@ public class Sprint3 {
 
 					auxE = numEquipe[i];
 					numEquipe[i] = numEquipe[i + 1];
-					numEquipe[i + 1] = auxE;
-
-					auxT = pontuacaoTotal[i];
-					pontuacaoTotal[i] = pontuacaoTotal[i + 1];
-					pontuacaoTotal[i + 1] = auxT;
-
-
-
-					
+					numEquipe[i + 1] = auxE;					
 				}
 			}
 		}
 		System.out.println("\n Ranking: (Em caso de empate, a nota de design do robô será quesito de desempate) ");
 		System.out.println();
 		for (int i = 0; i < pontosCombate.length; i++) {
-			System.out.println("equipe #" + numEquipe[i] + " | Pontos de Combate: " + pontosCombate[i] +" | Nota de design: "+notaDesign[i]+" |Pontuação total: " + pontuacaoTotal[i]);
+			System.out.println("#"+(i+1)+" equipe: " + numEquipe[i] + " | Pontos de Combate: " + pontosCombate[i] +" | Nota de design: "+notaDesign[i]);
 		}
 
 	}
